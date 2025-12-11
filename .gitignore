@@ -1,0 +1,6 @@
+# MLflow experiments
+mlruns/
+
+# Local models
+models/
+*.pkl

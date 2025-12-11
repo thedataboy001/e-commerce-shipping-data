@@ -1,0 +1,83 @@
+# E-Commerce Shipping Data Classification Model - Configuration File
+
+# Data Configuration
+data:
+  raw_path: "data/01-raw/raw_data.csv"
+  processed_path: "data/02-preprocessed/processed_data.csv"
+  
+# Feature Engineering
+features:
+  target_column: "Reached.on.Time_Y.N"
+  drop_columns:
+    - "ID"
+  numerical_features:
+    - "Cost_of_the_Product"
+    - "Discount_offered"
+    - "Weight_in_gms"
+    - "Prior_purchases"
+    - "Customer_care_calls"
+    - "Customer_rating"
+  categorical_features:
+    - "Warehouse_block"
+    - "Mode_of_Shipment"
+    - "Product_importance"
+    - "Gender"
+
+# Model Training Configuration
+training:
+  test_size: 0.3
+  random_state: 24
+  stratify: true
+  
+# Random Forest Model Hyperparameters
+random_forest:
+  n_estimators: 600
+  min_samples_split: 2
+  min_samples_leaf: 3
+  max_features: null
+  max_depth: null
+  class_weight: "balanced_subsample"
+  bootstrap: false
+  random_state: 24
+
+# MLflow Configuration
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "ecommerce_shipping_rf"
+  run_name: "random_forest_v1"
+  artifact_path: "model"
+  registered_model_name: null
+
+# Model Artifacts
+artifacts:
+  models_dir: "models"
+  model_file: "model.pkl"
+  feature_columns_file: "feature_columns.joblib"
+  scaler_file: "scaler.joblib"
+  confusion_matrix_plot: "confusion_matrix.png"
+
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  title: "E-Commerce Shipping Classification API"
+  version: "1.0.0"
+  description: "API for predicting on-time delivery of e-commerce shipments"
+
+# Gradio Configuration
+gradio:
+  port: 7860
+  share: false
+  debug: false
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Docker Configuration
+docker:
+  base_image: "python:3.11-slim"
+  expose_ports:
+    - 8000
+    - 7860

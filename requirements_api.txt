@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+gradio
+
+pandas
+numpy
+scikit-learn
+joblib
+
+mlflow
+python-dotenv
